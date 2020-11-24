@@ -7,6 +7,6 @@ https://developer.spotify.com/documentation/general/guides/authorization-guide/
 
 To get public infromation on tracks and artists run ```python3 get-public-info.py```
 
-WIP script to interact with private user data.
+To get private infromation on tracks and artists run ```python3 get-private-info.py```
 
 
