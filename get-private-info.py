@@ -6,15 +6,13 @@ import time
 from secrets import *
 import webbrowser
 
-#----Functions----
-
 # Authorize to Spotify API
 def auth():
 
     payload = {'redirect_uri':'http://localhost', 'client_id': SPOTIFY_CLIENT_ID, 'client_secret': SPOTIFY_CLIENT_SECRET}
 
     scopes_num = int(input("Please enter number of scopes you wish to activate: "))
-    scopes = [] 
+    scopes = []
 
     for scope in range(0, scopes_num):
         scope = str(input("\nPlease enter valid a scope for more information https://developer.spotify.com/documentation/general/guides/scopes/:  "))
@@ -25,7 +23,7 @@ def auth():
     print("\nActivation box will open click ok, copy and paste the link you are redirected to from your browser starting with 'localhost'\n")
     firsturl = str("https://accounts.spotify.com/authorize/?client_id=" + SPOTIFY_CLIENT_ID + "&response_type=code&redirect_uri=http://localhost&scope=" + "%20".join(scopes))
     webbrowser.open(firsturl, new=0)
-    
+
     url = input("\nPaste localhost url: ")
     # Error handling for wrong URL
     parsed_url = urlparse(url)
@@ -79,12 +77,10 @@ def get_user_saved_track():
     tracks = requests.get("https://api.spotify.com/v1/me/tracks/?limit=50&offset=20&market=GB", headers=headers)
     parsed = json.loads(tracks.text)
     print("\nPlease see full list of liked songs in songs.json\n")
-    
+
     # Creates external json file with liked songs listed in pretty json
     with open('songs.json', 'w') as json_file:
         json.dump(parsed, json_file, indent=2)
-
-#----Script----
 
 auth()
 get_valid_auth_header()
