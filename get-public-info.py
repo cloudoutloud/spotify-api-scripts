@@ -6,22 +6,20 @@ from secrets import *
 import requests
 import json
 
-#----Functions----
-
 # Authenticate to API
 def auth():
 
     print("Authenticating to spotify API.....")
 
     AUTH_URL = 'https://accounts.spotify.com/api/token'
-    
+
     # Post to API
     auth_response = requests.post(AUTH_URL, {
         'grant_type': 'client_credentials',
         'client_id': SPOTIFY_CLIENT_ID,
         'client_secret': SPOTIFY_CLIENT_SECRET,
     })
-    
+
     if auth_response.status_code == 200:
         print(auth_response.status_code)
         print('You have sucessfully authenticated to spotify API!')
@@ -30,7 +28,7 @@ def auth():
         print('[!] Error bad request')
     else:
         print('[!] Request has Failed')
-    
+
     # convert the response to JSON
     auth_response_data = auth_response.json()
 
@@ -64,14 +62,14 @@ def get_track_info():
     else:
         print('Error please provide valid track ID: ')
 
-    
+
     r = requests.get(api_url + '/' + track_id, headers=headers)
     r = r.json()
     print(r)
 
 # Artists
 def get_artists_info():
-   
+
     headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
     }
@@ -83,17 +81,10 @@ def get_artists_info():
         print('Valid artist ID')
     else:
         print('Error please provide valid artist ID: ')
-    
-    # if str(sub_endpoint) != '':
-    #     print('Valid sub endpoint')
-    # else:
-    #     print('Error please provide valid sub endpoint for more details https://developer.spotify.com/documentation/web-api/reference/artists/')
 
     r = requests.get(api_url + '/' + artist_id, headers=headers)
     r = r.json()
     print(r)
-
-#----Script----
 
 auth()
 endpoint()
