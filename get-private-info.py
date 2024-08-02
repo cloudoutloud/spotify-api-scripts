@@ -3,7 +3,6 @@ from urllib.parse import urlparse
 import json
 import time
 from secrets import *
-import webbrowser
 from private import private_auth
 
 def get_valid_auth_header():
@@ -46,6 +45,6 @@ def get_private_playlist():
     with open('playlists.json', 'w') as json_file:
         json.dump(parsed, json_file, indent=2)
 
-# get_devices()
+get_devices()
 get_user_saved_track()
-# get_private_playlist()
+get_private_playlist()
