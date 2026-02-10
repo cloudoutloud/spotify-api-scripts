@@ -1,4 +1,4 @@
-from secrets import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+import os
 import requests
 
 access_token = None
@@ -12,8 +12,8 @@ def public_auth():
     try:
         auth_response = requests.post(auth_url, {
             'grant_type': 'client_credentials',
-            'client_id': SPOTIFY_CLIENT_ID,
-            'client_secret': SPOTIFY_CLIENT_SECRET,
+            'client_id': os.getenv('SPOTIFY_CLIENT_ID'),
+            'client_secret': os.getenv('SPOTIFY_CLIENT_SECRET'),
         })
 
         if auth_response.status_code == 200:

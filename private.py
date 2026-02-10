@@ -1,6 +1,6 @@
 import sys
 import json
-from secrets import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+import os
 import webbrowser
 import time
 from urllib.parse import urlparse, parse_qs
@@ -10,7 +10,7 @@ import requests
 # Auth to API with scopes using a access token
 def private_auth():
 
-    payload = {'redirect_uri':'http://localhost', 'client_id': SPOTIFY_CLIENT_ID, 'client_secret': SPOTIFY_CLIENT_SECRET}
+    payload = {'redirect_uri':'http://127.0.0.1:8888', 'client_id': os.getenv('SPOTIFY_CLIENT_ID'), 'client_secret': os.getenv('SPOTIFY_CLIENT_SECRET')}
 
     scopes_num = int(input("Please enter number of scopes you wish to activate: "))
     scopes = []
@@ -22,10 +22,10 @@ def private_auth():
     print("\nConfirming scopes selected:", scopes)
 
     print("\nActivation box will open click ok, copy and paste the link you are redirected to from your browser starting with 'localhost'\n")
-    firsturl = str("https://accounts.spotify.com/authorize/?client_id=" + SPOTIFY_CLIENT_ID + "&response_type=code&redirect_uri=http://localhost&scope=" + "%20".join(scopes))
+    firsturl = str("https://accounts.spotify.com/authorize/?client_id=" + os.getenv('SPOTIFY_CLIENT_ID') + "&response_type=code&redirect_uri=http://127.0.0.1:8888&scope=" + "%20".join(scopes))
     webbrowser.open(firsturl, new=0)
 
-    url = input("\nPaste localhost authentication url: ")
+    url = input("\nPaste authentication url: ")
 
     try:
         parsed_url = urlparse(url)
