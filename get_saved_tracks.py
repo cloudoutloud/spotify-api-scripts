@@ -2,7 +2,6 @@ import requests
 import json
 from private import private_auth
 
-# Need scope user-library-read
 def get_saved_tracks():
     """Get all tracks saved in user's library"""
     auth_code = private_auth()
